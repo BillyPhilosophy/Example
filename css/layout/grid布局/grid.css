@@ -1,0 +1,12 @@
+.grid{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	color: var(--block-font-color);
+	gap: 24px;
+}
+.grid .item{
+	background-color: var(--blockbg-color);
+	border-radius: 10px;
+	text-align: center;
+}
+

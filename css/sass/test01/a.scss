@@ -1,0 +1,6 @@
+$highlight-color: #F90;
+$height:100px;
+.selected {
+  border: 1px solid $highlight-color;
+	height: $height;
+}

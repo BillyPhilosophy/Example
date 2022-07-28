@@ -1,0 +1,9 @@
+:root{
+	--main-color: #f6f6f6;
+	--blockbg-color:pink;
+	--block-font-color:#fff
+}
+*{
+	margin: 0;
+	padding: 0;
+}
