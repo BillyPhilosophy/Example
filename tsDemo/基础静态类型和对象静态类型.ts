@@ -20,8 +20,8 @@ const person: {
 	age: 18
 }
 
-const persons :string [] = ['dong','wang'];
-
+let persons :string [];
+persons = ['123','313']
 class PersonOrigin{}
 const single :PersonOrigin = new PersonOrigin();
 
