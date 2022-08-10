@@ -8,6 +8,8 @@ nums = 123;
 let numsInference = 123;
 let nums1 = 123;
 
+// let obj : null;
+// obj = undefined
 
 
 //对象静态类型有  object array class function
@@ -25,4 +27,6 @@ persons = ['123','313']
 class PersonOrigin{}
 const single :PersonOrigin = new PersonOrigin();
 
-const personFn :()=>string = ()=> 'wenben'
+const personFn :()=>string = ()=> 'wenben';
+let date1 : Date;
+date1 = new Date()
