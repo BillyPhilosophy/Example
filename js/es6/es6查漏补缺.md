@@ -383,7 +383,10 @@ console.log(x === y); // true
 ```
 > ### 内置的Symbol值（此处有点多，直接跳转=>）[8.内置的Symbol值](https://es6.ruanyifeng.com/#docs/symbol)
 
-## 七、
+## 七、proxy
+> ### var proxy = new Proxy(target, handler);
+> Proxy 对象的所有用法，都是上面这种形式，不同的只是handler参数的写法。其中，new Proxy()表示生成一个Proxy实例，target参数表示所要拦截的目标对象，handler参数也是一个对象，用来定制拦截行为。
+
 
 
 

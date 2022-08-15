@@ -41,23 +41,32 @@
 // clonec.m();
 
 
-function D (){
-  this.p = 13
-  this.fn = ()=>{console.log('fn')}
-};
-D.prototype = {
-  m(){},
-  testprop:'test'
-}
+// function D (){
+//   this.p = 13
+//   this.fn = ()=>{console.log('fn')}
+// };
+// D.prototype = {
+//   m(){},
+//   testprop:'test'
+// }
 
-let d = new D();
-// Object.getOwnPropertyDescriptor只能获取对象自有属性，原型链上的无法获取
-let descriptor1 = Object.getOwnPropertyDescriptor(d,'testprop')//undefined
-let descriptor2 = Object.getOwnPropertyDescriptor(d,'m')//undefined
-let descriptor3 = Object.getOwnPropertyDescriptor(d,'fn')//正常打印数据属性对象
-let cloned = {...d};
-console.log(cloned.testprop);//undefined
-cloned.fn()//正常
-cloned.m()//报错
+// let d = new D();
+// // Object.getOwnPropertyDescriptor只能获取对象自有属性，原型链上的无法获取
+// let descriptor1 = Object.getOwnPropertyDescriptor(d,'testprop')//undefined
+// let descriptor2 = Object.getOwnPropertyDescriptor(d,'m')//undefined
+// let descriptor3 = Object.getOwnPropertyDescriptor(d,'fn')//正常打印数据属性对象
+// let cloned = {...d};
+// console.log(cloned.testprop);//undefined
+// cloned.fn()//正常
+// cloned.m()//报错
 
-
+// Proxy
+var proxy = new Proxy({}, {
+  get: function(target, propKey,receiver) {
+    console.log(target);
+    console.log(propKey);
+    console.log(receiver);
+    return 35;
+  }
+});
+console.log(proxy.name)
