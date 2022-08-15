@@ -149,7 +149,7 @@ obj.find() // "hello"
 ```
 
 > ### 扩展运算符注意点 
-> 类的方法都是不可枚举的?此处有疑问 后来发现挂载在原型上的属性和方法也都不可枚举（理解错误其实原因是，非自身的属性而不清楚是否不可枚举，但是理论上不可枚举，否则容易被遍历出来）
+> 类的方法都是不可枚举的?是的，调用getOwnPropertyDescriptor后发现确实enumerable: false, es5中在原型上的自定义的属性和方法默认都是可以枚举的enumerable: true.
 
 对象的扩展运算符，只会返回参数***对象自身***的、可枚举的属性，这一点要特别小心，尤其是用于类的实例对象时。
 
@@ -176,7 +176,7 @@ D.prototype = {
 }
 
 let d = new D();
-// Object.getOwnPropertyDescriptor只能获取对象自有属性，原型链上的无法获取
+// Object.getOwnPropertyDescriptor只能获取对象自有属性，原型链上的必须直接在原型对象上调用getOwnPropertyDescriptor
 let descriptor1 = Object.getOwnPropertyDescriptor(d,'testprop')//undefined
 let descriptor2 = Object.getOwnPropertyDescriptor(d,'m')//undefined
 let descriptor3 = Object.getOwnPropertyDescriptor(d,'fn')//正常打印数据属性对象
@@ -195,7 +195,7 @@ let aClone = Object.assign({}, a);
 ```
 // 写法一
 const clone1 = {
-  __proto__: Object.getPrototypeOf(obj),
+  __proto__: Object.getPrototypeOf(obj),//获取实例的原型对象
   ...obj
 };
 

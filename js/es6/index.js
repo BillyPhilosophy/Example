@@ -29,15 +29,17 @@
 // obj.find() // "hello"
 // console.log(obj.find());
 
-// class C {
-//   p=12;
-//   m(){}
-// }
+class C {
+  p=12;
+  m(){}
+}
 
-// let c = new C();
-// c.m();
-// let clonec = {...c};
-// console.log(clonec.p);
+let c = new C();
+c.m();
+let descriptor1 = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(c),'m');
+console.log(descriptor1);
+let clonec = {...c};
+console.log(clonec.p);
 // clonec.m();
 
 
@@ -51,6 +53,9 @@
 // }
 
 // let d = new D();
+// let descriptor1 = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(d),'m');
+// console.log(descriptor1);
+
 // // Object.getOwnPropertyDescriptor只能获取对象自有属性，原型链上的无法获取
 // let descriptor1 = Object.getOwnPropertyDescriptor(d,'testprop')//undefined
 // let descriptor2 = Object.getOwnPropertyDescriptor(d,'m')//undefined
@@ -60,13 +65,15 @@
 // cloned.fn()//正常
 // cloned.m()//报错
 
+
+
 // Proxy
-var proxy = new Proxy({}, {
-  get: function(target, propKey,receiver) {
-    console.log(target);
-    console.log(propKey);
-    console.log(receiver);
-    return 35;
-  }
-});
-console.log(proxy.name)
+// var proxy = new Proxy({}, {
+//   get: function(target, propKey,receiver) {
+//     console.log(target);
+//     console.log(propKey);
+//     console.log(receiver);
+//     return 35;
+//   }
+// });
+// console.log(proxy.name)
