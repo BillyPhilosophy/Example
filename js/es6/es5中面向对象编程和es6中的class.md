@@ -112,12 +112,33 @@
 许多oo语言都支持两种继承方式：接口继承和实现继承<br>
 es只支持实现继承ts中实现了接口继承
 + 原型链继承
-+ 寄生构造函数继承
-
-
+  - 只是用原型链继承
+    - 问题1：原型会变成另一个类型的实例，原先的实例属性也就顺理成章的变成了现在的原型属性了，此时原型属性若有引用数据类型，每个实例改变引用类型的值，所有的实例这个值都会随之改变
+    - 问题2：在创建子类实例时不能向父类型的构造函数中传参
++ 借用构造函数
+  - 问题：方法只能定义到构造函数上，每个方法都要在每个实例中创建一遍，无法做到复用
++ 组合继承
+  - 将原型链和借用构造函数的技术组合到一起是js中泛用的继承方式
+  - 问题：会调用两次父类型构造函数，属性会在实例和原型上各写一次
++ 原型式继承
+  - Object.Create()规范化了原型式继承
+  - 问题：包含引用类型值的属性始终都会共享相应的值
++ 寄生式继承
+  - 复用问题和构造函数模式一样
++ 寄生组合式继承
+  - 解决了组合继承中在原型上创建多余的，不必要的实例属性,父类型只调用一次
+    ```
+      function inheritPrototype(subType,superType){
+        var prototype = Object.Create(superType.prototype);
+        prototype.constructor = subType;
+        subType.prototype = prototype
+      }
+    ```
+<br>
 
 --------------------------
 
+<br>
 
 >## ES6 class
 ### 一些不了解的新知识
@@ -138,8 +159,57 @@ es只支持实现继承ts中实现了接口继承
   IncreasingCounter类有一个_count实例属性，一目了然。另外，写起来也比较简洁。
   ```
 + 在“类”的内部可以使用get和set关键字，对某个属性设置存值函数和取值函数，拦截该属性的存取行为。存值函数和取值函数是设置在属性的 Descriptor 对象上的。
-+ 
++ 静态方法：类相当于实例的原型，所有在类中定义的方法，都会被实例继承。如果在一个方法前，加上static关键字，就表示该方法不会被实例继承，而是直接通过类来调用，这就称为“静态方法”。<font color="red">静态方法可以与非静态方法重名。</font>
+  - 父类的静态方法，可以被子类继承。
+    ```
+    class Foo {
+      static classMethod() {
+        return 'hello';
+      }
+    }
 
+    class Bar extends Foo {
+    }
+
+    Bar.classMethod() // 'hello'
+    ```
+  - 静态方法也是可以从super对象上调用的。
+    ```
+    class Foo {
+      static classMethod() {
+        return 'hello';
+      }
+    }
+
+    class Bar extends Foo {
+      static classMethod() {
+        return super.classMethod() + ', too';
+      }
+    }
+
+    Bar.classMethod() // "hello, too"
+    ```
++ 静态属性：静态属性指的是 Class 本身的属性，即Class.propName，而不是定义在实例对象（this）上的属性。
+  - 因为 ES6 明确规定，Class 内部只有静态方法，没有静态属性。现在有一个<font color=red>提案(新写法可能有兼容问题)</font>提供了类的静态属性，写法是在实例属性的前面，加上static关键字。
+    ```
+    // 老写法
+    class Foo {
+      // ...
+    }
+    Foo.prop = 1;
+
+    // 新写法
+    class Foo {
+      static prop = 1;
+    }
+    class MyClass {
+    static myStaticProp = 42;
+      constructor() {
+        console.log(MyClass.myStaticProp); // 42
+      }
+    }
+    ```
++ 私有属性：只能在类的内部访问的方法和属性，外部不能访问。ES2022正式为class添加了私有属性，方法是在属性名之前使用#表示。注意，私有属性的属性名必须包括#，如果不带#，会被当作另一个属性。这种写法不仅可以写私有属性，还可以用来写私有方法。另外，私有属性也可以设置 getter 和 setter 方法。
 
 
 
