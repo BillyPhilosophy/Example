@@ -120,3 +120,27 @@ es只支持实现继承ts中实现了接口继承
 
 
 >## ES6 class
+### 一些不了解的新知识
+
++ 实例属性现在除了可以定义在constructor()方法里面的this上面，也可以定义在类内部的最顶层。
+  ```
+  class IncreasingCounter {
+    _count = 0;
+    get value() {
+      console.log('Getting the current value!');
+      return this._count;
+    }
+    increment() {
+      this._count++;
+    }
+  }
+  //需要注意的是新写法定义的属性是实例对象自身的属性，而不是定义在实例对象的原型上面。这时，不需要在实例属性前面加上this。
+  IncreasingCounter类有一个_count实例属性，一目了然。另外，写起来也比较简洁。
+  ```
++ 在“类”的内部可以使用get和set关键字，对某个属性设置存值函数和取值函数，拦截该属性的存取行为。存值函数和取值函数是设置在属性的 Descriptor 对象上的。
++ 
+
+
+
+
+
