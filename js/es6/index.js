@@ -29,17 +29,17 @@
 // obj.find() // "hello"
 // console.log(obj.find());
 
-class C {
-  p=12;
-  m(){}
-}
+// class C {
+//   p=12;
+//   m(){}
+// }
 
-let c = new C();
-c.m();
-let descriptor1 = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(c),'m');
-console.log(descriptor1);
-let clonec = {...c};
-console.log(clonec.p);
+// let c = new C();
+// c.m();
+// let descriptor1 = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(c),'m');
+// console.log(descriptor1);
+// let clonec = {...c};
+// console.log(clonec.p);
 // clonec.m();
 
 
@@ -77,3 +77,53 @@ console.log(clonec.p);
 //   }
 // });
 // console.log(proxy.name)
+
+// proxy
+// var handler = {
+//   get:function(target,name){
+//       console.log('get方法')
+//       return 123
+//   },
+//   set:function(target,name,value){
+//       console.log('set方法')
+//       target[name] = value
+//   }
+// }
+// var proxy = new Proxy({},handler)
+// console.log(proxy.name)
+// console.log(proxy.time)
+// proxy.title = '测试代码'
+// console.log(proxy.title)
+
+
+// let obj = {
+//   proxy: new Proxy({}, {
+//     get:function(target,name){
+//       console.log('get方法')
+//       return 123
+//   },
+//   }) 
+// };
+
+// let obj = {
+  
+// };
+
+// let proxy = new Proxy({}, {
+//   get:function(target,name){
+//     console.log('get方法')
+//     return 123
+//   }
+// }) 
+// let obj = Object.create(proxy)
+
+// console.log(obj.name);
+
+var object = { proxy: new Proxy({}, {
+  get:function(target,name){
+    console.log('get方法')
+    return 123
+  }
+})};
+
+console.log(object.name);
