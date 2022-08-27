@@ -119,11 +119,55 @@
 
 // console.log(obj.name);
 
-var object = { proxy: new Proxy({}, {
-  get:function(target,name){
-    console.log('get方法')
-    return 123
-  }
-})};
+// var object = {};
+// object.proxy=new Proxy(object,{
+//   get:function(target,name){
+//     console.log('get方法')
+//     return 123
+//   }
+// });
 
-console.log(object.name);
+// console.log(object.name);
+
+// proxy的13种拦截
+
+// var handler = {
+//   get: function(target, name) {
+//     if (name === 'prototype') {
+//       return Object.prototype;
+//     }
+//     return 'Hello, ' + name;
+//   },
+//   set:function(){
+//     return 123
+//   },
+
+//   apply: function(target, thisBinding, args) {
+//     return args[0];
+//   },
+
+//   construct: function(target, args) {
+//     return {value: args[1]};
+//   }
+// };
+
+// var fproxy = new Proxy(function(x, y) {
+//   return x + y;
+// }, handler);
+
+// // console.log(fproxy(1, 2) );
+
+// fproxy.name = 1;
+// console.log(fproxy.name);
+
+let proto = new Proxy({}, {
+  get(target, propertyKey, receiver) {
+    console.log('GET ' + propertyKey);
+    return target[propertyKey];
+  }
+});
+
+let obj = Object.create(proto);
+// obj.foo = 1
+obj.foo
+
