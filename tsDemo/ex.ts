@@ -179,3 +179,22 @@
 // };
 // let strings: string[] = pluck(person, ['name']); // ok, string[]
 // console.log(strings)
+
+// let someValue: object = {a:1};
+
+// let obj: object = (someValue as unknown as {b:1});
+// console.log(obj);
+
+
+// type Second = number; // 基本类型
+// let time: Second = 10; // time的类型其实就是number类型
+
+type SetUser = (name: string, age: number)=>void;
+
+// let fn : SetUser = (name,age)=>{
+//   return name+':'+age
+// }
+// let fn = (name:number,age:number):string=>{
+//   return name+age;
+// }
+// console.log(fn(1,2))
