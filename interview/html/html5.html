@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="week">
+        <input type="month">
+        <input type="time">
+        <input type="search">
+        <input type="url">
+        <input type="color" >
+        <input type="tel">
+        <input type="email">
+        <input type="range">
+        <input type="datetime">
+        <input type="date">
+        <input type="datetime-local">
+        <input type="text" list="city">
+        <datalist id="city">
+            <option value="北京市"></option>
+            <option value="上海市"></option>
+            <option value="香港"></option>
+        </datalist>
+
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+            <mrow>
+                <msup><mi>a</mi><mn>2</mn></msup>
+                <mo>+</mo>
+                <msup><mi>b</mi><mn>2</mn></msup>
+                <mo>=</mo>
+                <msup><mi>c</mi><mn>2</mn></msup>
+            </mrow>
+        </math>
+        <div draggable="true" ondragstart="drag(event)">Drag</div>
+
+
+    </div>
+    <script type="text/javascript">
+        function drag(e){
+            console.log(e);
+        }
+
+        window.navigator.geolocation.getCurrentPosition(
+         
+            function(pos){
+                console.log('定位时间：',pos.timestamp);
+                console.log('经度：',pos.coords.longitude);
+                console.log('纬度：',pos.coords.latitude);
+                console.log('海拔：',pos.coords.altitude);
+                console.log('速度：',pos.coords.speed);
+            },
+            function(err){ 
+                console.log(123)
+                console.log(err);
+            }
+        )
+    </script>
+<!--  
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp } = Vue
+        const vm = createApp({
+            data() {
+                return {
+                    color:''
+                }
+            },
+
+        }).mount('#app')
+    </script> -->
+</body>
+</html>
