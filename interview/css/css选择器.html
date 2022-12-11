@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="s4">相邻选择器 +</div>
+<div>相邻选择器</div>
+<!-- + 只选择紧邻的兄弟 -->
+<div id="s5">相邻选择器 ~</div>
+<div class="s6">相邻选择器</div>
+<div class="s6">相邻选择器</div>
+<div class="s6">相邻选择器</div>
+<!-- ~ 选择兄弟以及兄弟的兄弟..... -->
+
+ <style type="text/css">
+    #s4 + div{
+        color: #0033ff;
+    }
+    #s5 ~ .s6{
+        color: #FFD700;
+    }
+</style>
+<hr>
+<div class="s7">
+  <div>子元素选择器</div>
+  <em>
+      <div>子元素选择器不被选择</div>
+      <div>子元素选择器不被选择</div>
+  </em>
+</div>
+
+<style type="text/css">
+  /* 子选择器会选择下一级 */
+  .s7 > div{
+      color: #E066FF;
+  }
+</style>
+<hr>
+<div class="s9">
+  <div>通配符选择器</div>
+  <em>通配符选择器</em>
+</div>
+
+<style type="text/css">
+  .s9 * {
+      color: #3370CC
+  }
+</style>
+
+
+</body>
+</html>

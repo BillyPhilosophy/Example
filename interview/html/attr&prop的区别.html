@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="this-input" type="t" value="test" />
+    <input id="another-input" type="type" customize="test" />
+    <script>
+        // console.log(document.querySelector("#this-input").getAttribute("type")); // t // attribute
+        // console.log(document.querySelector("#this-input").type); // text // property
+
+        // console.log(document.querySelector("#this-input").getAttribute("value")); // test
+        // console.log(document.querySelector("#this-input").value); // t
+        // console.log(document.querySelector("#this-input").defaultValue); // test
+
+        console.log(document.querySelector("#another-input").customize); // undefined
+        console.log(document.querySelector("#another-input").getAttribute("customize")); // test
+    </script>
+</body>
+</html>

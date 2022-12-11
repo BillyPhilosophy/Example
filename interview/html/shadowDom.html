@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shadow DOM</title>
+    <style>
+        .text{
+            color: blue; /* 设置字体颜色 */ /* 可以看出在外部定义的样式无法影响到影子内部元素样式 */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="shadow-cls">123</div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    (function(doc, win){
+        var shadowHost = doc.querySelector(".shadow-cls"); // 获取影子宿主shadow host
+        var shadowRoot = shadowHost.attachShadow({mode: "open"}); // 创建(附加)影子shadow root // open 表示可以通过页面内的 JavaScript 方法来获取 Shadow DOM
+        var style = doc.createElement("style"); // 创建style元素
+        style.textContent = `
+            .text{
+                font-style: italic;
+            }
+        `; // 影子内部样式
+        const template = `
+          <div>
+              <div class="text">Text</div>
+          </div>
+        `; // 模板 // 另外可以尝试 <template> 以及 <script text/template>
+        const container = doc.createElement("div"); // 创建容器
+        container.innerHTML = template; // 加入容器
+        shadowRoot.append(style, container); // 加入影子
+    })(document, window);
+</script>
+</html>
