@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    window.a = 1; // 定义一个全局变量
+    var obj = {a: 2} // 定义一个对象用来绑定
+    var funct = function(b, c) { console.log(this.a,b,c); return 1; }; // 定义一个函数用来执行
+
+    funct(1, 2); // 1 1 2  // 直接执行，相当于window.funct(1, 2)，this绑定于window
+    funct.apply(obj, [1, 2]); // 2 1 2 // 使用apply将this绑定到obj对象
+
+    Function.prototype._apply = function(base, args) { // 拓展Function原型
+        base = base || window; // 传递绑定的对象为null或undefined时指向window
+        console.log(this);
+        base.fn = this; // 调用_apply时的this指向的是调用者也就是函数对象，将函数对象赋值给base对象的一个属性
+        var result = base.fn(...args); // 调用base.fn时，fn中的this指针指向的是base，并使用Spread操作符展开参数传参
+        delete base.fn; // 删除base对象的fn属性
+        return result; // 将返回值返回
+    }
+
+    funct._apply(obj, [1, 2]); // 2 1 2 // this绑定到了obj对象
+  </script>
+</body>
+</html>

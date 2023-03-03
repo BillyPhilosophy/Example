@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JS事件流模型</title>
+</head>
+<style type="text/css">
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<body>
+    <div id="i1" style="height: 150px;width: 150px;background: red;">
+        <div id="i2" style="height: 100px;width: 100px;background: green;">
+            <div id="i3" style="height: 50px;width: 50px;background: blue;"></div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    document.addEventListener('click',(e) => {
+        alert(0);
+    },true) 
+    document.getElementById("i1").addEventListener('click',(e) => {
+        alert(1);
+    },true) 
+    document.getElementById("i2").addEventListener('click',(e) => {
+        alert(2);
+    })  
+    document.getElementById("i3").addEventListener('click',(e) => {
+        alert(3);
+    })     
+</script>
+</html>
