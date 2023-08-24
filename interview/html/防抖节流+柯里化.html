@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>柯里化实验</title>
+  </head>
+  <body>
+    <button>点击</button>
+    <input type="text" id="inputField" />
+    <script>
+      const dom = document.querySelector("button");
+      let count = 0;
+      const clickHandle = (...arg) => {
+        console.log(...arg);
+        count++;
+        console.log(`点击了${count}次`);
+      };
+      //
+      const realFn  = debonce(clickHandle, 300)
+      dom.onclick = ()=>{
+        realFn('1','2')
+      }
+
+      function debonce(fn, delay) {
+        let timer = null;
+        return function (...args) {
+          timer&&clearTimeout(timer);
+          timer = setTimeout(() => {
+            fn(...args);
+          }, delay);
+        };
+      }
+
+      // 防抖函数
+      // function debounce(fn, delay) {
+      //   let timer;
+
+      //   return function (...args) {
+      //     clearTimeout(timer);
+      //     timer = setTimeout(() => {
+      //       fn(...args);
+      //     }, delay);
+      //   };
+      // }
+
+      // // 柯里化函数
+      // function curry(fn) {
+
+      //   return function curried(...args) {
+      //     console.log(fn.length);
+      //     if (args.length >= fn.length) {
+      //       return fn(...args);
+      //     } else {
+      //       return function (...moreArgs) {
+      //         return curried(...args, ...moreArgs);
+      //       };
+      //     }
+      //   };
+      // }
+
+      // // 原始的函数
+      // function handleInput(value) {
+      //   console.log(`Input value: ${value}`);
+      // }
+
+      // // 使用柯里化结合防抖创建一个新函数
+      // const curriedDebouncedInputHandler = curry(debounce(handleInput, 300));
+      // document
+      //   .getElementById("inputField")
+      //   .addEventListener("input", (event) => {
+      //     const value = event.target.value;
+      //     curriedDebouncedInputHandler(value);
+      //   });
+    </script>
+  </body>
+</html>

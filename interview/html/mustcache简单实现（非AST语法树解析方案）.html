@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>模板语法</title>
+</head>
+<body>
+    <div id="root">
+        <div>{{show}}</div>
+        <div>{{description}}</div>
+    </div>
+</body>
+    <script type="text/javascript">
+        var data = { 
+            show: 1,
+            description: "一个简单的模板语法"
+        };
+
+        function render(element, data) {
+            var originString = element.innerHTML;
+            console.log(String(originString||'').replace(/"/g,'\\"'));
+            var html = String(originString||'').replace(/"/g,'\\"').replace(/\s+|\r|\t|\n/g, ' ')
+            .replace(/\{\{(.)*?\}\}/g, function(value){ 
+                return  value.replace("{{",'"+(').replace("}}",')+"');
+            })
+            html = `var targetHTML = "${html}";return targetHTML;`;
+            console.log(html);
+            var parsedHTML = new Function(...Object.keys(data), html)(...Object.values(data));
+            element.innerHTML = parsedHTML;
+        }
+
+        render(document.getElementById("root"), data);
+    </script>
+</html> 

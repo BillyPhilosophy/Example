@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 使用Generator函数处理异步
+    // var it = null;
+    // var count = 0;
+
+    // function f(){
+    //   count++
+    //   var rand = Math.random() * 2;
+    //   setTimeout(function(){
+    //       if(it) it.next(rand);
+    //   },1000)
+    // }
+
+    // function* g(){ 
+    //   var r1 = yield f();
+    //   console.log(r1);
+    //   var r2 = yield f();
+    //   console.log(r2);
+    //   var r3 = yield f();
+    //   console.log(r3);
+    // }
+
+    // it = g();
+    // it.next();
+
+    // 实现一个Thunk函数的自动流程管理
+    function thunkFunct(index){
+      return function f(funct){
+        var rand = Math.random() * 2;
+        setTimeout(() => funct({rand:rand, index: index}), 1000)
+      }
+    }
+
+    function* g(){ 
+      var r1 = yield thunkFunct(1);
+      console.log(r1.index, r1.rand);
+      var r2 = yield thunkFunct(2);
+      console.log(r2.index, r2.rand);
+      var r3 = yield thunkFunct(3);
+      console.log(r3.index, r3.rand);
+    }
+
+    function run(generator){
+      var g = generator();
+
+      var next = function(data){
+        var res = g.next(data);
+        if(res.done) return ;
+        res.value(next);//此处递归
+      }
+
+      next();
+    }
+
+    run(g);
+
+
+  </script>
+</body>
+</html>
