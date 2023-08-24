@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>函数式编程</title>
+</head>
+<body>
+  <script>
+    const compose = (...fns) => (...args) => fns.reduceRight((params, fn) => [fn.apply(null, [].concat(params))], args).pop();
+
+    const f = x => x + 1;
+    const g = x => x * 2;
+    const t = (x, y) => x + y;
+
+    let fgt = compose(f, g, t);
+    console.log(fgt(1, 2)); // 7 // 3 -> 6 -> 7
+
+
+
+  </script>
+</body>
+</html>
