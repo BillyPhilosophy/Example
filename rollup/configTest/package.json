@@ -1,0 +1,15 @@
+{
+  "name": "configtest",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "build:input": "rollup -c ./rollup.config.js",
+    "build:input1": "rollup -c ./rollup.config.glob.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "glob": "^10.3.10"
+  }
+}
